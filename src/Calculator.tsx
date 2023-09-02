@@ -64,16 +64,29 @@ const Calculator: React.FC<CalculatorProps> = () => {
   const handleOperatorClick = (newOperator: string) => {
     // Clear the history by setting it to an empty array
     setHistory([]);
+
     if (inputValue !== "Can't divide by zero") {
-      setInputValue(inputValue + newOperator);
-      setCurrentOperation(currentOperation + newOperator);
+      // Check if the current input value is "0" without a decimal point
+      if (inputValue === "0" && !inputValue.includes(".")) {
+        setInputValue("0" + newOperator); // Add the operator without leading zeros
+        setCurrentOperation("0" + newOperator);
+      } else {
+        setInputValue(inputValue + newOperator);
+        setCurrentOperation(currentOperation + newOperator);
+      }
     }
   };
 
   const handleEqualsClick = () => {
     try {
-      let result = eval(inputValue); // Use eval to calculate the result
-      result = result.toFixed(6).replace(/\.?0+$/, "");
+      let expression = inputValue.replace(/(^|[^.])\b0+(\d)/g, "$1$2"); // Remove leading zeros
+      let result = eval(expression); // Use eval to calculate the result
+
+      // Format the result to remove unnecessary decimal places and trailing zeros
+      result = parseFloat(result)
+        .toFixed(6)
+        .replace(/\.?0+$/, "");
+
       if (isNaN(result) || !isFinite(result)) {
         setInputValue("Can't divide by zero");
       } else {
@@ -85,8 +98,8 @@ const Calculator: React.FC<CalculatorProps> = () => {
         ) {
           setHistory((prevHistory) => [...prevHistory, newOperation]);
         }
-        setInputValue(result.toString());
-        setCurrentOperation(result.toString());
+        setInputValue(result);
+        setCurrentOperation(result);
       }
     } catch (error) {
       console.error(error);
@@ -114,7 +127,7 @@ const Calculator: React.FC<CalculatorProps> = () => {
     >
       <CardHeader
         id="display"
-        className="flex-1 w-max-[30%] h-full bg-[#264099] text-5xl font-light	 text-white text-right font-mono flex justify-end items-center truncate "
+        className="flex-1 w-max-[30%] h-full bg-[#264099] text-5xl font-light min-h-[10%]	 text-white text-right font-mono flex justify-end items-center truncate "
       >
         <div className="text-right truncate font-light">
           {history.map((item, index) => (
