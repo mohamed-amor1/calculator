@@ -16,12 +16,6 @@ This is a simple calculator web application built using React and TypeScript. It
 - History log of calculations
 - Responsive design for various screen sizes
 
-## Prerequisites
-
-Before you start, ensure you have the following installed:
-
-- Node.js: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
-
 ## Usage
 
 - Click on the calculator buttons to input numbers and perform operations.
