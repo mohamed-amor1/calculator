@@ -79,7 +79,7 @@ const Calculator: React.FC<CalculatorProps> = () => {
 
   const handleEqualsClick = () => {
     try {
-      let expression = inputValue.replace(/(^|[^.])\b0+(\d)/g, "$1$2"); // Remove leading zeros
+      const expression = inputValue.replace(/(^|[^.])\b0+(\d)/g, "$1$2"); // Remove leading zeros
       let result = eval(expression); // Use eval to calculate the result
 
       // Format the result to remove unnecessary decimal places and trailing zeros
