@@ -127,7 +127,7 @@ const Calculator: React.FC<CalculatorProps> = () => {
     >
       <CardHeader
         id="display"
-        className="flex-1 w-max-[30%] h-full bg-[#264099] text-5xl font-light min-h-[10%]	 text-white text-right font-mono flex justify-end items-center truncate "
+        className="flex-1 w-max-[30%] h-full bg-[#264099] text-5xl font-light min-h-[40%]		 text-white text-right font-mono flex justify-end items-center truncate "
       >
         <div className="text-right truncate font-light">
           {history.map((item, index) => (
